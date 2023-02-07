@@ -19,10 +19,8 @@ The only code I plan to jack, is the scaffolding of the vpc. Outside of that, I 
 ## Overview
 Two api's exist in this project, `api` and `user-api`, both are nestjs projects:
 
-[api](api/README.md]
-
-[user-api](user-api/README.md]
-
+[api](api/README.md)
+[user-api](user-api/README.md)
 
 Locally, you should run each project using `npm run start:dev`. This ensures both api's run on different ports.
 The `api` will run on `3000` and the `user-api` will run on `4000`.
