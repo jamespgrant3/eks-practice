@@ -15,3 +15,13 @@ I'd like to have three EKS tasks: ui, api, and users api.
 The ui pod is self explanatory. The api is like a orchestration layer, it just makes calls to other services. In this case, the api will call the users api. This will get us that pod-to-pod communication. That api call will just return some hard-coded data.
 
 The only code I plan to jack, is the scaffolding of the vpc. Outside of that, I will write everything.
+
+## Overview
+Two api's exist in this project, `api` and `user-api`, both are nestjs projects:
+
+[api](api/README.md]
+[user-api](user-api/README.md]
+
+
+Locally, you should run each project using `npm run start:dev`. This ensures both api's run on different ports.
+The `api` will run on `3000` and the `user-api` will run on `4000`.
