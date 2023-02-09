@@ -43,6 +43,12 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# to build the image
+$ npm run docker:build
+
+# to run the container
+$ docker run -d -p 4000:4000 --name user-api <partial-image-id>
 ```
 
 ## Test

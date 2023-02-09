@@ -10,7 +10,7 @@ export interface User {
 @Injectable()
 export class AppService {
   public async getUsers(): Promise<User[]> {
-    const response = await fetch(`${userApiUrl}/users`, { method: 'GET' });
+    const response = await fetch(`${userApiUrl}`, { method: 'GET' });
     return response.json();
   }
 }

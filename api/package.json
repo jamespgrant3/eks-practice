@@ -7,6 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "dist:clear": "rm -rf ./dist",
+    "docker:build": "npm run dist:clear && npm run build && docker build -t jamespgrant3/eks-api .",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "USER_API_URL=http://localhost:4000 nest start --watch",

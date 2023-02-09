@@ -43,6 +43,15 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# to build the image
+$ npm run docker:build
+
+# this container has a dependecy on the user-api, and docker bridge networking only allows ip address communication between containers
+# get the ip address of the user-api
+$ docker inspect <user-api-container-id> | grep "IPAddress"
+
+$ docker run -d -e USER_API_URL=http://<user-id-ip-address>:4000 -p 3000:3000 --name api <partial-image-id>
 ```
 
 ## Test
