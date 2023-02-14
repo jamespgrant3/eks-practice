@@ -203,6 +203,36 @@ Resources:
       GroupDescription: "Security group with no ingress rule"
       VpcId: !Ref VPC
 
+  K8sRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - eks.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      Description: "A role for the eks cluster to assume"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+      RoleName: eks-cluster-policy
+
+  K8sCluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      KubernetesNetworkConfig:
+        IpFamily: ipv4
+        ServiceIpv4Cidr: "10.100.0.0/16"
+      Name: "k8s-practice"
+      ResourcesVpcConfig:
+        SubnetIds:
+          - !GetAtt PrivateSubnet1.SubnetId
+          - !GetAtt PrivateSubnet2.SubnetId
+      RoleArn: !GetAtt K8sRole.Arn
+
 Outputs:
   VPC:
     Description: A reference to the created VPC
