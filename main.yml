@@ -270,6 +270,7 @@ Resources:
         - !GetAtt PrivateSubnet2.SubnetId
       Tags:
         Name: k8s-node
+    DependsOn: K8sCluster
 
 Outputs:
   VPC:
