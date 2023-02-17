@@ -233,6 +233,44 @@ Resources:
           - !GetAtt PrivateSubnet2.SubnetId
       RoleArn: !GetAtt K8sRole.Arn
 
+  NodeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      Description: "A role for the eks node to assume"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+      RoleName: eks-node-policy
+
+  K8sNodeGroup:
+    Type: AWS::EKS::Nodegroup
+    Properties:
+      AmiType: AL2_ARM_64
+      ClusterName: "k8s-practice"
+      InstanceTypes:
+        - "t4g.micro"
+      NodegroupName: "k8s-practice-node-group"
+      NodeRole: !GetAtt NodeRole.Arn
+      ScalingConfig:
+        DesiredSize: 1
+        MaxSize: 1
+        MinSize: 1
+      Subnets:
+        - !GetAtt PrivateSubnet1.SubnetId
+        - !GetAtt PrivateSubnet2.SubnetId
+      Tags:
+        Name: k8s-node
+
 Outputs:
   VPC:
     Description: A reference to the created VPC
