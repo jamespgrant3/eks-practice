@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-api
+  template:
+    metadata:
+      labels:
+        app: user-api
+    spec:
+      containers:
+      - name: user-api
+        image: jamespgrant3/eks-user-api:latest
+        ports:
+        - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: jamespgrant3/eks-api:latest
+        ports:
+        - containerPort: 3000

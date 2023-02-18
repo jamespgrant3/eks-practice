@@ -13,4 +13,3 @@ COPY --from=build-env /app /app
 WORKDIR /app
 
 CMD ["/app/main.js"]
-

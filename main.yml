@@ -258,7 +258,7 @@ Resources:
       AmiType: AL2_ARM_64
       ClusterName: "k8s-practice"
       InstanceTypes:
-        - "t4g.micro"
+        - t4g.small
       NodegroupName: "k8s-practice-node-group"
       NodeRole: !GetAtt NodeRole.Arn
       ScalingConfig:
