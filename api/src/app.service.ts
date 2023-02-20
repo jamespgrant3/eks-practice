@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-const userApiUrl = process.env.USER_API_URL || '';
+const userApiHost = process.env.USER_API_HOST || '';
 
 export interface User {
   firstName: string;
@@ -10,7 +10,15 @@ export interface User {
 @Injectable()
 export class AppService {
   public async getUsers(): Promise<User[]> {
-    const response = await fetch(`${userApiUrl}`, { method: 'GET' });
-    return response.json();
+    const url = `http://${userApiHost}`;
+    console.log('making a request to', url);
+
+    try {
+      const response = await fetch(url, { method: 'GET' });
+      return response.json();
+    } catch (e) {
+      console.log('an exception occurred', e);
+      throw e;
+    }
   }
 }
