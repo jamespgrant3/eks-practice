@@ -11,14 +11,8 @@ export interface User {
 export class AppService {
   public async getUsers(): Promise<User[]> {
     const url = `http://${userApiHost}`;
-    console.log('making a request to', url);
 
-    try {
-      const response = await fetch(url, { method: 'GET' });
-      return response.json();
-    } catch (e) {
-      console.log('an exception occurred', e);
-      throw e;
-    }
+    const response = await fetch(url, { method: 'GET' });
+    return response.json();
   }
 }
