@@ -51,7 +51,7 @@ $ npm run docker:build
 # get the ip address of the user-api
 $ docker inspect <user-api-container-id> | grep "IPAddress"
 
-$ docker run -d -e USER_API_URL=http://<user-id-ip-address>:4000 -p 3000:3000 --name api <partial-image-id>
+$ docker run -d -e USER_API_URL=localhost:4000 -p 3000:3000 --name api <partial-image-id>
 ```
 
 ## Test
